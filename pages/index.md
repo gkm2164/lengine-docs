@@ -1,44 +1,84 @@
 ---
-title: Get started with Markdoc
-description: How to get started with Markdoc
+title: Lengine Introduction
+description: Introduction of Lengine language / compiler
 ---
 
-# Full Next.js example
+# Lengine Introduction
 
-{% callout %}
-This is a full-featured boilerplate for a creating a documentation website using Markdoc and Next.js.
-{% /callout %}
+Lengine is a language which based upon LISP. All code can be built upon JVM binary code, and also executes on the JVM machine directly.
 
-## Setup
+## Install and first code
 
 First, clone this repo and install the dependencies required:
 
 ```bash
-npm install
-# or
-yarn install
+$ git clone https://github.com/gkm2164/lengine
 ```
 
-Then, run the development server:
+Then, build lengine parser/compilers
 
 ```bash
-npm run dev
-# or
-yarn dev
+$ cd lengine
+$ ./install.sh
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Will generate some files here. Now, let's write some simple code and build.
 
-You can start editing the page by modifying `index.md`. The page auto-updates as you edit the file.
+Create a file named `hello.lg`, and open it.
 
-## Deploy
+Now, type below statements.
 
-The quickest way to deploy your own version of this boilerplate is by deploying it with [Vercel](https://vercel.com) or [Netlify](https://www.netlify.com/) by clicking one of the buttons below.
+```lisp
+;;; hello.lg
+(module hello)
 
-### Deploy with Vercel
+(println "Hello, World!")
+```
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/markdoc/next.js-starter)
+first line, ;;; is to write down some comment. You can use the character `;` throughout the codes to leave any comments.
 
-### Deploy to Netlify
+2nd line, module is compiler directive, and it lets compile know that this is built in this module name. Will discuss this later, but, the compiler takes this as class name.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/markdoc/next.js-starter)
+Last, it will print "Hello, World!" to the console.
+
+Let's build it and execute.
+
+```
+$ ./lenginec hello.lg
+$ ./leng hello
+Hello, World!
+```
+
+Since the LISP is for efficient list processing language, let's use some of examples here. Again, let's open the hello.lg file, and make some changes on there.
+
+```
+(module hello)
+
+(require "collections")
+
+(def xs [1 2 3 4 5])
+
+(println (fold xs 0 +))
+```
+
+To use collection types, you should import all `collections`.
+
+At third line, `def` is to define a new variable.
+It will define a variable name `xs`, and the value is `[1 2 3 4 5]`
+
+Underlied implementation of list is single linked list, and you can decalre it with below.
+
+```
+;;; [1 2 3 4 5] equivalent representation
+(cons 1 (cons 2 (cons 3 (cons 4 (cons 5 nil)))))
+```
+
+The 4th line is to run `fold` operation. `fold` is to aggregate all elements in collections with an operation. `+` is a function takes 2 parameters, and return a value which add them.
+
+So, `fold` would repeatedly add all the element starting from `0`.
+
+```
+$ ./lenginec hello.lg
+$ ./leng hello
+15
+```
