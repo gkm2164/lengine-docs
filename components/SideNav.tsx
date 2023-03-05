@@ -4,19 +4,28 @@ import Link from 'next/link';
 
 const items = [
   {
+    title: 'Introduction',
+    link: { href: '/' },
+    links: [],
+  },
+  {
     title: 'Get started',
-    links: [{href: '/docs', children: 'Overview'}],
+    links: [
+      {href: '/docs', children: 'Overview'},
+      {href: '/basic', children: 'Basic of Lengine'},
+      {href: '/collections', children: 'Collections'},
+
+    ],
   },
 ];
 
 export function SideNav() {
   const router = useRouter();
-
   return (
     <nav className="sidenav">
       {items.map((item) => (
         <div key={item.title}>
-          <span>{item.title}</span>
+          <span>{item.link ? <Link href={item.link.href} className={router.pathname === item.link.href ?'active': ''}>{item.title}</Link> : <>{item.title}</>}</span>
           <ul className="flex column">
             {item.links.map((link) => {
               const active = router.pathname === link.href;
