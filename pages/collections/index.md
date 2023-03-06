@@ -6,8 +6,11 @@ title: Collections
 
 Lengine supports List, Sequence, Set, Map, and Stream types as default collections.
 
-## List
+## Type of Collections
 
+### List
+
+#### 1. Define a list
 
 Since the LISP is for efficient list processing language, let's use some of examples here.
 
@@ -47,3 +50,71 @@ $ ./lenginec hello.lg
 $ ./leng hello
 15
 ```
+
+#### 2. Empty list
+
+`nil`
+
+#### 3. Manipulation
+
+### Sequence
+
+```
+(seq [1 2 3 4 5])
+```
+
+### Set
+
+An unordered collection. Fast at adding element & checking element is in the collection.
+
+```
+(set [1 2 3 4 5])
+```
+
+### Hashed Object
+
+A hash map
+
+```
+;;; Object
+{
+  :id 7
+  :name "James Bond"
+  :email "jamesbond007@secretagent.com"
+}
+```
+
+access
+
+```
+(def person {
+  :id 7
+  :name "James Bond"
+  :email "jamesbond007@secretagent.com"
+})
+
+(println (:name person))
+;;; == "James Bond"
+```
+
+Note that `:name` is a function which takes 1 parameter.
+
+### Stream
+
+A linked list that allows to work with lazy evaluation.
+
+```
+('cons 1 'nil)
+
+('cons 1 #('cons 1))
+```
+
+## Manipulate your collections
+
+- `head`
+- `tail`
+- `take`
+- `drop`
+- `loop`
+- `fold`
+- `reduce`

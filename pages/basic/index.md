@@ -119,3 +119,16 @@ To define a variable, you should use `def` keyword.
 ```
 
 Above example shows how to define variable x & y, and use it under 
+
+## Lazy evaluations
+
+```lengine
+(def x (lazy (some-def)))
+;;; ==
+(def x #(some-def))
+
+
+(def y (force x))
+;;; ==
+(def y !(x))
+```
