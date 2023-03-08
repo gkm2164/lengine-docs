@@ -180,7 +180,7 @@ We can make a call as above way. However, we want to define a one-time use funct
 
 ### Recursion
 
-One of beauty of the functional programming is that we maximize the use of recursion. Let's take a moment for implementing factorial.
+One of beauty of the functional programming is that the developers can maximize the use of recursion. Let's take a moment for implementing factorial.
 
 In mathematics, factorial is denoted as `n!`, and it's value is `n * (n - 1) * (n - 2) * ... * 1`.
 
@@ -230,7 +230,7 @@ Here's how the above code is represented
 
 ```
 
-Above logic requires a stack growth until it can calculate the desired result. But, from 1 till 8, the stack is required. Fortunately, from 1 ~ 4, the stack became 0. But, from 5 ~ 9, even 6 ~ 8 reduces stack into 1, still, line number 5, 8, 9 requires additional stack. So technically, 3 stack spaces are keep accumulated for making any recursive calls.
+Above logic requires a stack growth until it can calculate the desired result. From 1 till 8, the stack is grown. Fortunately, from 1 ~ 4, the stack became 0. But, from 5 ~ 9, even 6 ~ 8 reduces stack into 1, still, line number 5, 8, 9 requires additional stack. So technically, 3 stack spaces are keep accumulated for making any recursive calls which means that the program eventually finished with errors.
 
 The next section would present how this can be optimized, and be an alternative for while loop.
 
