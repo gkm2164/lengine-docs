@@ -160,6 +160,27 @@ So, with the defintion of function in lambda, below 2 are identical.
 (def adder (lambda (x y) (+ x y)))
 ```
 
+### Short version of lambda
+
+Now, the lambda can be shorten with the character `^`. Let's take a look following example again.
+
+```
+(lambda (x y) (+ x y))
+```
+
+The above one is identical with below
+
+```
+^((x y) (+ x y))
+```
+
+So, above `adder` variable with lambda definition can be re-written in below form.
+
+```
+(def adder ^((x y) (+ x y)))
+```
+
+
 ### Calling function
 
 As you notice from the introduction, the way to function call is made with clause, `(<function> param1 param2 ... paramn)`.
@@ -172,11 +193,13 @@ For example, to use a function defined above,
 (adder 3 5)
 ```
 
-We can make a call as above way. However, we want to define a one-time use function, and now lambda came up.
+We can make a call as above way. However, sometimes, we want to define a one-time use function, and now lambda came up.
 
 ```lengine
-((lambda (x y) (+ x y)) 3 5)
+(^((x y) (+ x y)) 3 5)
 ```
+
+This one is useful, when you define a function that has child function.
 
 ### Recursion
 
