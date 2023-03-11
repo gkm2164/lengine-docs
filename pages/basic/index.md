@@ -317,3 +317,7 @@ Above recursion function can be simplied into below form.
 ```
 
 Then, the compiler would notice a symbol `$` as `recursion`, and would call itself.
+
+
+## Basic operations - defined in prelude.lg
+

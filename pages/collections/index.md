@@ -283,3 +283,22 @@ Example:
 ;;; (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 nil)))))
 ;;; (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 nil)))))
 ```
+
+- `++`
+
+Merging 2 collections
+
+Usage: `(++ xs ys)`
+
+- `>+`
+
+Append an element at the front of collection
+
+Usage: `(>+ elem collection)`
+
+- `+<`, `+:`
+
+Append an element at the end of the collection
+
+Usage: `(+< collection elem)`
+
