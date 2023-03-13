@@ -14,7 +14,7 @@ const items = [
       {href: '/docs', children: 'Overview'},
       {href: '/basic', children: 'Basic of Lengine'},
       {href: '/collections', children: 'Collections'},
-
+      {href: '/examples', children: 'Examples'}
     ],
   },
 ];

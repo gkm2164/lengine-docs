@@ -160,6 +160,29 @@ So, with the defintion of function in lambda, below 2 are identical.
 (def adder (lambda (x y) (+ x y)))
 ```
 
+The difference between function and lambda is that the function assumes that it has a name when define it. For example, let's modify above code a bit.
+
+```
+(module failure-compile)
+
+(require "collections") ;;; to use head / tail
+
+;;; Below is compiled
+(fn adders (acc xs)
+    (if (nil? xs) acc
+        (adders (+ acc (head xs)) (tail xs))))
+
+
+;;; Below is not able to compiled, and will fail with saying not found adders'
+(def adders' (lambda (acc xs) 
+    (if (nil? xs) acc
+        (adders' (+ acc (head xs)) (tail xs)))))
+;;; [ERROR]: Unable to resolve: adders' at compile-example/failure-compile.lg:14:10
+
+```
+
+Above code shows the difference of it.
+
 ### Short version of lambda
 
 Now, the lambda can be shorten with the character `^`. Let's take a look following example again.
@@ -318,6 +341,164 @@ Above recursion function can be simplied into below form.
 
 Then, the compiler would notice a symbol `$` as `recursion`, and would call itself.
 
+## Define of module, export, import, require
 
-## Basic operations - defined in prelude.lg
+Now, moving into another phase.
+On the real world, as the service's scale getting larger, the codes cannot be written in to one file, since more than one developer involves into the project. Also, modularizing a service makes it easier to publish it as library, and use it.
 
+In this section, let's assume that we're about to build some library, and importing from some logics.
+
+### Important compiler directives
+
+Before moving into actual explanation, let's take a look for 4 directives needs to make your code as a library module.
+
+- `module`
+
+Usage: `(module name.with.separating.dot)`
+
+Module declarative is to give a module's name. This one is similar to java's approach.
+
+Below one will create a class namely, `hello`.
+
+```
+(module hello)
+```
+
+Now, if you want to give some package name,
+
+```
+(module a.hello)
+```
+
+Above one will create a folder `a`, and inside `a`, it will put `hello.class` file there.
+
+- `export`
+
+Export is to expose a variable or a method to other modules.
+
+Let's take a look this example
+
+```
+(module hello)
+
+(fn adder-3 (a b c) ((+ a b) c))
+
+(export adder-3)
+
+(export magic-number 30)
+
+(export sub-3 ^((a b c) (- (- a b) c)))
+
+(export sigma ^((n) 
+    (if (< n 1) 0
+        (+ n ($ (- n 1))))))
+```
+
+Above code shows how to export 3 different kind of ways.
+
+First one is to export a pre-defined function to outside of the module.
+
+Second line is to export a value 30 as symbol name `magic-number`.
+
+Third line is to export lambda which is subtract `b` and `c` from `a`.
+
+Forth export is to export a lambda that do some recursion.
+
+- `import`
+
+Now, with above module/exported, let's import the symbols.
+
+Import is to get a symbol individually, not importing entire modules.
+
+Let's prepare one example module to export
+
+```
+;;; Filename: hello-module-exports.lg
+(module hello-module-exports)
+
+(export hello ^((msg) (printf "Hello, %s!\n" [msg])))
+```
+
+And with above module, let's import from another module here.
+
+```
+;;; Filename: hello-module-imports.lg
+(module hello-module-imports)
+
+(import hello-module-exports.hello)
+
+(hello "Lengine")
+```
+
+And, let's compile both file individually.
+
+```
+$ ./lenginec hello-module-exports.lg
+$ ./lenginec hello-module-imports.lg
+```
+
+And you would be able to see few class files are generated from currently working directory.
+
+
+And now, let's execute the consuming script.
+
+```
+$ ./leng hello-module-imports
+Hello, Lengine!
+```
+
+However, importing a library individually is exhaustive for developers.
+
+- `require`
+
+Above example is for individually importing the files. How about you want to import entire exported symbols to this script?
+
+```
+(module hello-module-imports)
+
+(require "hello-module-exports")
+
+(hello "Lengine")
+```
+
+Actually, whenever you compile your code, the code automatically imports one big library file, `lengine-code/prelude.lg`.
+
+Please note that, the behvaior of export/import are much similar to the script languages, which means that if you imports more and more, running your scripts could take a bit longer.
+
+This part needs to be improved by importing the variables when it is actually called, and under development.
+
+### Use of directives
+
+```lengine
+;;; my-adder.lg
+(module my-adder)
+
+;;; Limitation of `+` operation is that, it only takes 2 parameters. I want 3!
+(fn adder-3 (a b c) (+ (+ a b) c))
+
+(export adder-3)
+
+(export magic-number 10293848576)
+```
+
+```lengine
+;;; main.lg
+(module main)
+
+(import my-adder.adder-3)
+
+(println (adder-3 1 2 3))
+;;; 6
+```
+
+```lengine
+;;; main-2.lg
+(module main)
+
+(require "my-adder")
+
+(println magic-number)
+;;; 10293848576
+(println (adder-3 1 2 3))
+;;; 6
+```
