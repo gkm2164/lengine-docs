@@ -1,27 +1,10 @@
 ---
-title: Overview
+title: Hello, Lengine!
 ---
 
 # {% $markdoc.frontmatter.title %}
 
-## Install and run your first code
-
-You should install [SBT](https://www.scala-sbt.org) on your machine.
-
-First, clone this repo and install the dependencies required:
-
-```bash
-$ git clone https://github.com/gkm2164/lengine
-```
-
-Then, build lengine parser/compilers
-
-```bash
-$ cd lengine
-$ ./install.sh
-```
-
-Will generate some files here. Now, let's write some simple code and build.
+Now, let's write some simple code and build.
 
 Create a file named `hello.lg`, and open it.
 
