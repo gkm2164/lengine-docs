@@ -48,47 +48,6 @@ There's also special character types, such as, space, and linefeed.
 #\Rubout        ;;; forward delete
 ```
 
-#### Integer Number
-
-Integer type is 64-bits integers, and signed number.
-
-```
-;;; example of integer number
-0
-10
--10
-#16rA   ;; hex representation of number 10
-#2r1010 ;; binary representation of number 10
-```
-
-#### Double Number
-
-Double is 64-bits floating points.
-
-```
-0.15
-2e10
-```
-
-### Complex Type
-
-Complex type is compose of primitive types.
-
-#### Ratio Number
-
-Ratio number is represent as `Integer/Integer` form. For example, `3/5` is `0.6`. This type is to preserve loss of fractions, and assure precise numbers. However, 
-
-```
-3/5
-```
-
-#### Complex Number
-
-Complex number is composed of real / imagination numbers
-
-```
-#C(1 2)  ;;; 1 + 2i, real number is 1, and imagination number 2
-```
 
 #### String
 

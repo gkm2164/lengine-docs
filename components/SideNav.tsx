@@ -66,6 +66,12 @@ const items = [
     ],
   },
   {
+    title: 'Macro',
+    links: [
+      {href: '', children: 'Introduction to Macro'},
+    ],
+  },
+  {
     title: 'Advanced Topics',
     links: [
       {href: '', children: 'Interoperability with other languages'}

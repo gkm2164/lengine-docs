@@ -9,7 +9,9 @@ Lengine is a language which based upon LISP. The Parser/Compiler are written in 
 
 # Where can I start?
 
-To start with the Lengine, read [Get Started/Overview](./docs).
+To start with the Lengine, take a look Get Started sections.
+To install the language, [Get Started/Installing the language](./getting-started/install).
+To write a hello world, [Get Started/Hello, Lengine!](./getting-started/helloworld).
 
 # Contribution
 
