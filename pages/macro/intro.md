@@ -12,7 +12,7 @@ Let's take a look with few examples.
 
 ```
 (defmacro hello (,my ,name ,is varname)
-    (printf "Hello, %s" [varname]))
+    (printf "Hello, %s\n" [varname]))
 
 (hello my name is "Gyeongmin")
 ```
@@ -21,7 +21,7 @@ Above example shows how to use `defmacro`
 
 Comma(,) is to denote the compiler that the symbol name should be literally that name. So, even compiler recognize `my`, `name`, and `is`, those are should be a part of pattern matching.
 
-Also, note that, all `hello`, `my`, `name` and `is` are dispeared after conversion is done, and only remains macro body, `(printf "Hello, %s", ["Gyeongmin"])`
+Also, note that, all `hello`, `my`, `name` and `is` are dispeared after conversion is done, and only remains macro body, `(printf "Hello, %s\n", ["Gyeongmin"])`
 
 ```
 (defmacro print-fmt (fmt args*)
@@ -40,4 +40,4 @@ This way, you don't need to define multiple functions to accept variable length 
 (println (adds 1 2 3 4 5))
 ```
 
-Above is to define adding variable number of numbers. This one, 
+Above is to define adding variable number of numbers. As you can notice, all numbers 1, 2, 3, 4, 5 is aggregated into a list type.
