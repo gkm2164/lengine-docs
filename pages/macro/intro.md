@@ -4,6 +4,10 @@ title: Introduction to Macro
 
 # {% $markdoc.frontmatter.title %}
 
+Macro is a one of compiler directives along with `module`, `import`, `export`, and `require`. However, it is one of powerful, in terms of giving developers to think out of syntax definitions in this websites. Although, the result of macro should be compiled, but, before that, you can define your own syntax.
+
+Let's take a look with few examples.
+
 ## Simple hello world
 
 ```
@@ -16,6 +20,8 @@ title: Introduction to Macro
 Above example shows how to use `defmacro`
 
 Comma(,) is to denote the compiler that the symbol name should be literally that name. So, even compiler recognize `my`, `name`, and `is`, those are should be a part of pattern matching.
+
+Also, note that, all `hello`, `my`, `name` and `is` are dispeared after conversion is done, and only remains macro body, `(printf "Hello, %s", ["Gyeongmin"])`
 
 ```
 (defmacro print-fmt (fmt args*)
@@ -34,4 +40,4 @@ This way, you don't need to define multiple functions to accept variable length 
 (println (adds 1 2 3 4 5))
 ```
 
-Above is to define adding variable number of numbers.
+Above is to define adding variable number of numbers. This one, 
