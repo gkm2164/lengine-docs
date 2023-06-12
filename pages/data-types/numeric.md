@@ -60,7 +60,6 @@ Supported operators:
 +, -, *, /, rem
 ```
 
-
 ## Complex Type
 
 Complex type is combination of primitive types. At the JVM level, this one is not supported with primitive types, but, is capsulated with some class types.
