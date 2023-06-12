@@ -9,10 +9,9 @@ Lengine is a language which based upon LISP. The Parser/Compiler are written in 
 
 # Where can I start?
 
-To start with the Lengine, take a look Get Started sections.
-To install the language, [Get Started/Installing the language](./getting-started/install).
-To write a hello world, [Get Started/Hello, Lengine!](./getting-started/helloworld).
-To use with IntelliJ plugin, include [this link](https://plugins.lengine.io) to your intellij plugin.
+- To install the language, see [Get Started/Installing the language](./getting-started/install).
+- To begin with a hello world example, see [Get Started/Hello, Lengine!](./getting-started/helloworld).
+- To use with IntelliJ plugin, include [this link](https://plugins.lengine.io) to your intellij plugin.
 
 
 # Contribution
