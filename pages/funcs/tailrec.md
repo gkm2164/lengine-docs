@@ -2,13 +2,15 @@
 title: Tail recursion optimization
 ---
 
+# {% $markdoc.frontmatter.title %}
+
 ### Recursion
 
-One of beauty of the functional programming is that the developers can maximize the use of recursion. Let's take a moment for implementing factorial.
+One of a beauty of the functional programming is that the developers can maximize the use of recursion. Let's take a look this example.
 
-In mathematics, factorial is denoted as `n!`, and it's value is `n * (n - 1) * (n - 2) * ... * 1`.
+In mathematics, factorial is denoted as `n!`, and it is equivalent to `n * (n - 1) * (n - 2) * ... * 1`.
 
-If you are familiar with imperative programming, the factorial can be implemented as follows.
+If you are familiar with imperative programming, such as C++, the factorial can be implemented as follows.
 
 ```c++
 int ret = 1;
@@ -19,7 +21,7 @@ for (int i = 2; i < n; i++) {
     ret *= i;
 }
 
-cout << ret << endl;
+// `ret` contains the result
 ```
 
 In lengine, there's no such loop, but, it has recursion.
@@ -32,7 +34,7 @@ In lengine, there's no such loop, but, it has recursion.
 
 So, if you run `(fact 5)`, it will exactly show the `120`.
 
-However, it's not actually working as a loop, but, function.
+However, it's not actually working as a loop, but, recursive function calls.
 Here's how the above code is represented
 
 ```jvm
@@ -54,9 +56,9 @@ Here's how the above code is represented
 
 ```
 
-Above logic requires a stack growth until it can calculate the desired result. From 1 till 8, the stack is grown. Fortunately, from 1 ~ 4, the stack became 0. But, from 5 ~ 9, even 6 ~ 8 reduces stack into 1, still, line number 5, 8, 9 requires additional stack. So technically, 3 stack spaces are keep accumulated for making any recursive calls which means that the program eventually finished with errors.
+Above logic requires a stack to be grown until it can calculate the desired result or, badly, overflow the stacks, especially looking at the byte codes, from the line number 1 till 8. Fortunately, from 1 ~ 4, the stack is still not grown but, remains as it was. But, from 5 ~ 9, even 6 ~ 8 reduces stack into 1, still, line number 5, 8, 9 requires additional stack. So technically, 3 stack spaces are keep accumulated for making any recursive calls which means that the program eventually finished with errors.
 
-The next section would present how this can be optimized, and be an alternative for while loop.
+The next section provides how this can be optimized, which is an alternative version of while loop.
 
 ### Tail recursion
 
